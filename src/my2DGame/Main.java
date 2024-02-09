@@ -10,7 +10,7 @@ public class Main {
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
-		frame.setTitle("new Game");
+		frame.setTitle("New Game");
 		
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
