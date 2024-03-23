@@ -23,8 +23,12 @@ public class Main {
 		frame.add(GamePanel);
 		frame.pack();
 		
+		GamePanel.startGameThread();
+		
 		frame.setLocationRelativeTo(null); //this sets the relative location of the window, to which is null
 		frame.setVisible(true); // and this simply displays the window on the shell.
+		
+		
 
 	}
 
