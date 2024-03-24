@@ -1,3 +1,3 @@
 I am following a tutorial on game development
 
-https://youtube.com/playlist?list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq&si=9J0UWPh2HiB7Rmh0
+<iframe width="560" height="315" src="https://www.youtube.com/embed/om59cwR7psI?si=7jQECKb6ChVDOawB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
