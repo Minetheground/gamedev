@@ -12,7 +12,7 @@ public class Main {
 		
 		// Beginning of main method
 		
-		JFrame frame = new JFrame();  // We plugin a class called JFrame to assign a variable called frame
+		JFrame frame = new JFrame();  // We start by plugging in a class called JFrame to assign a variable called frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // we begin to add some basic properties, here we tell the program to stop when the window is closed.
 		frame.setResizable(false);	//Then we disallow the user to resize our game as this could possibly break assets. 
 		frame.setTitle("New Game");   //Then of course the most important thing about the window is the title, so that you know what kind of game your playing.
