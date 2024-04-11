@@ -63,6 +63,24 @@ public class GamePanel extends JPanel implements Runnable{  // we extend from th
 		repaint();
 		
 		
+	try {	
+		double remainingTime = nextDrawTime - System.nanoTime();
+		
+		remainingTime = remainingTime/1000000;	
+		if(remainingTime < 0) {
+			remainingTime = 0;
+		}
+		
+		nextDrawTime += drawInterval;
+		
+			Thread.sleep((long) remainingTime);
+			
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		}
 		
 		
@@ -96,7 +114,7 @@ public class GamePanel extends JPanel implements Runnable{  // we extend from th
 		
 		Graphics2D g2 = (Graphics2D)g;
 		
-		g2.create(maxScreenCol, playerSpeed, screenWidth, screenHeight)
+		g2.create(maxScreenCol, playerSpeed, screenWidth, screenHeight);
 		
 		g2.setColor(Color.BLUE);
 		
