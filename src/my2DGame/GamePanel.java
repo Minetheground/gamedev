@@ -21,7 +21,7 @@ public class GamePanel extends JPanel implements Runnable{  // we extend from th
 	int FPS = 60;
 	
 	KeyHandler keyH = new KeyHandler();
-	Thread gamethread;
+	Thread gameThread;
 	
 	
 	int playerX = 100;
@@ -40,40 +40,42 @@ public class GamePanel extends JPanel implements Runnable{  // we extend from th
 	}
 	
 	public void startGameThread() {
-		gamethread = new Thread(this);
-		gamethread.start();
+		gameThread = new Thread(this);
+		gameThread.start();
 	}
 
 
 	@Override
 	public void run() {
 		
-		double drawInterval = 1000000/FPS;
+		double drawInterval = 1000000000/FPS;
 		double nextDrawTime = System.nanoTime() + drawInterval;
 		
-		while(gamethread !=  null) {
+		while(gameThread !=  null) {
 			
 			
 			
 		
 			// 1 Update: update information like Character Posision
-		update();
+			update();
 		
 		// 2 Draw: Draw the screen with the update information.
-		repaint();
+			repaint();
 		
 		
-	try {	
-		double remainingTime = nextDrawTime - System.nanoTime();
+			try {	
+				double remainingTime = nextDrawTime - System.nanoTime();
+		        remainingTime = remainingTime/1000000;	
+				
+		        if(remainingTime < 0) {
+				remainingTime = 0;
+				}
 		
-		remainingTime = remainingTime/1000000;	
-		if(remainingTime < 0) {
-			remainingTime = 0;
-		}
+				
 		
-		nextDrawTime += drawInterval;
-		
-			Thread.sleep((long) remainingTime);
+				  Thread.sleep((long) remainingTime);
+					
+				  nextDrawTime += drawInterval;
 			
 			
 		} catch (InterruptedException e) {
@@ -81,42 +83,42 @@ public class GamePanel extends JPanel implements Runnable{  // we extend from th
 			e.printStackTrace();
 		}
 		
-		}
+	}
 		
 		
 		
 		
-		}
+}
 	
-	public void update() {
+		public void update() {
 			
-		if(keyH.upPressed == true) {
+			if(keyH.upPressed) {
 			 playerY -= playerSpeed;
 		 
-		}
-		else if(keyH.downPressed == true) {
-			playerY += playerSpeed;
+			}
+			else if(keyH.downPressed) {
+				playerY += playerSpeed;
 			
 			}
-			 
-		else if (keyH.leftPressed == true) {
-			playerX -= playerSpeed;
+			
+			else if (keyH.leftPressed) {
+				playerX -= playerSpeed;
 
 		}
-		else if (keyH.rightPressed == true) {
-			playerX += playerSpeed;
+			else if (keyH.rightPressed) {
+				playerX += playerSpeed;
 		}
 		
 	}
 	
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
 		
 		Graphics2D g2 = (Graphics2D)g;
 		
-		g2.create(maxScreenCol, playerSpeed, screenWidth, screenHeight);
 		
-		g2.setColor(Color.BLUE);
+		
+		g2.setColor(Color.GREEN);
 		
 		g2.fillRect(playerX, playerY, tileSize, tileSize);
 		
