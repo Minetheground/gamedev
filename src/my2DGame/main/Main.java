@@ -1,4 +1,4 @@
-package my2DGame;
+package my2DGame.main;
 
 import javax.swing.JFrame;
 

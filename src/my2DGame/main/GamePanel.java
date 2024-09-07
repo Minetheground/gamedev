@@ -1,4 +1,6 @@
-package my2DGame;
+package my2DGame.main;
+
+import my2DGame.entity.Player;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,7 +14,7 @@ public class GamePanel extends JPanel implements Runnable{  // we extend from th
 	final int defaultTileSize = 16;		//so then we add a tile of size 16 x 16
 	final int scale = 3;                //to which is scaled by 3.
 	
-	final int tileSize = defaultTileSize * scale;  // then we multiply defaultTileSize and scale, to add in total 48 tiles to the panel
+	public final int tileSize = defaultTileSize * scale;  // then we multiply defaultTileSize and scale, to add in total 48 tiles to the panel
 	final int maxScreenCol = 16;					// then we add 16 of these 48 tiles in collons 
 	final int maxScreenRow = 12;                  // then we add 12 of these 48 tiles in rows
 	final int screenWidth = maxScreenCol * tileSize;   
@@ -22,7 +24,7 @@ public class GamePanel extends JPanel implements Runnable{  // we extend from th
 	
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
-	
+	Player player = new Player(this,keyH);
 	
 	int playerX = 100;
 	int playerY = 100;
@@ -92,22 +94,7 @@ public class GamePanel extends JPanel implements Runnable{  // we extend from th
 	
 		public void update() {
 			
-			if(keyH.upPressed) {
-			 playerY -= playerSpeed;
-		 
-			}
-			else if(keyH.downPressed) {
-				playerY += playerSpeed;
-			
-			}
-			
-			else if (keyH.leftPressed) {
-				playerX -= playerSpeed;
-
-		}
-			else if (keyH.rightPressed) {
-				playerX += playerSpeed;
-		}
+		player.update();
 		
 	}
 	
@@ -118,9 +105,7 @@ public class GamePanel extends JPanel implements Runnable{  // we extend from th
 		
 		
 		
-		g2.setColor(Color.GREEN);
-		
-		g2.fillRect(playerX, playerY, tileSize, tileSize);
+		player.draw(g2);
 		
 		g2.dispose();
 	}
