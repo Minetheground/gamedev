@@ -5,7 +5,9 @@ import my2DGame.main.KeyHandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Player extends Entity{
     GamePanel gp;
@@ -31,14 +33,14 @@ public class Player extends Entity{
     public void getPlayerImages() {
         try {
 
-            up1 = ImageIO.read(getClass().getResourceAsStream("/Player/boy_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/Player/boy_up_2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/Player/boy_down_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/Player/boy_down_2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/Player/boy_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/Player/boy_right_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/Player/boy_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/Player/boy_left_2.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_1.png"));
+            up2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_2.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_1.png"));
+            down2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_2.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_1.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_2.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_1.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_2.png"));
 
         } catch(IOException e) {
             e.printStackTrace();
@@ -66,10 +68,59 @@ public class Player extends Entity{
             direction = "right";
             x += speed;
         }
-    }
-    public void draw(Graphics2D g2) {
-        g2.setColor(Color.GREEN);
+        spriteCounter++;
+        if (spriteCounter > 10) {
+            if (spriteNum == 1) {
+                spriteNum = 2;
+            }
+            else if (spriteNum == 2) {
+                spriteNum = 1;
 
-        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+            }
+        }   spriteCounter = 0;
     }
-}
+
+
+    public void draw(Graphics2D g2) {
+
+     //   g2.setColor(Color.GREEN);
+
+    //    g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+
+
+        BufferedImage image = null;
+
+        if (direction == "up") {
+            if (spriteNum == 1) {
+                image = up1;
+            } else if (spriteNum == 2){
+                image = up2;
+            }
+        }else if (direction == "down"){
+           if (spriteNum == 1) {
+               image = down1;
+           } else if (spriteNum == 2) {
+               image = down2;
+           }
+
+
+        } else if (direction == "left") {
+            if (spriteNum == 1) {
+                image = left1;
+            } else if (spriteNum == 2) {
+                image = left2;
+            }
+        } else if (direction == "right") {
+            if (spriteNum == 1) {
+                image = right1;
+
+            }else if(spriteNum == 2) {
+                image = right2;
+            }
+        } else {
+            return;
+        }
+        g2.drawImage(image, x , y, gp.tileSize, gp.tileSize, null);
+
+
+}}
