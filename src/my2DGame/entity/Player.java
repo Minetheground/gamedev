@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
+
 public class Player extends Entity{
     GamePanel gp;
     KeyHandler keyH;
@@ -33,14 +34,14 @@ public class Player extends Entity{
     public void getPlayerImages() {
         try {
 
-            up1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_2.png"));
+            up1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_up_1.png"));
+            up2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_up_2.png"));
+            down1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_down_1.png"));
+            down2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_down_2.png"));
+            right1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_right_1.png"));
+            right2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_right_2.png"));
+            left1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_left_1.png"));
+            left2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_left_2.png"));
 
         } catch(IOException e) {
             e.printStackTrace();
@@ -48,37 +49,43 @@ public class Player extends Entity{
     }
 
     public void update() {
-        if(keyH.upPressed) {
-            direction = "up";
-            y -= speed;
 
-        }
-        else if(keyH.downPressed) {
-            direction = "down";
-            y += speed;
-
-        }
-
-        else if (keyH.leftPressed) {
-            direction = "left";
-            x -= speed;
-
-        }
-        else if (keyH.rightPressed) {
-            direction = "right";
-            x += speed;
-        }
-        spriteCounter++;
-        if (spriteCounter > 10) {
-            if (spriteNum == 1) {
-                spriteNum = 2;
-            }
-            else if (spriteNum == 2) {
-                spriteNum = 1;
+        if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) {
+            if(keyH.upPressed) {
+                direction = "up";
+                y -= speed;
 
             }
-        }   spriteCounter = 0;
-    }
+            else if(keyH.downPressed) {
+                direction = "down";
+                y += speed;
+
+            }
+
+            else if (keyH.leftPressed) {
+                direction = "left";
+                x -= speed;
+
+            }
+            else if (keyH.rightPressed) {
+                direction = "right";
+                x += speed;
+            }
+            spriteCounter++;
+            if (spriteCounter > 12) {
+                if (spriteNum == 1) {
+                    spriteNum = 2;
+                } else if (spriteNum == 2) {
+                    spriteNum = 1;
+
+                }
+                spriteCounter = 0;
+            }
+        }
+
+
+        }
+
 
 
     public void draw(Graphics2D g2) {
@@ -96,7 +103,7 @@ public class Player extends Entity{
             } else if (spriteNum == 2){
                 image = up2;
             }
-        }else if (direction == "down"){
+        }else if (direction =="down"){
            if (spriteNum == 1) {
                image = down1;
            } else if (spriteNum == 2) {
@@ -110,15 +117,12 @@ public class Player extends Entity{
             } else if (spriteNum == 2) {
                 image = left2;
             }
-        } else if (direction == "right") {
+        } else if (direction =="right")
             if (spriteNum == 1) {
-                image = right1;
+            image = right1;
 
-            }else if(spriteNum == 2) {
-                image = right2;
-            }
-        } else {
-            return;
+        } else if (spriteNum == 2) {
+            image = right2;
         }
         g2.drawImage(image, x , y, gp.tileSize, gp.tileSize, null);
 
