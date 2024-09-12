@@ -1,7 +1,6 @@
 package my2DGame.entity;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class Entity {
     public int x, y;
